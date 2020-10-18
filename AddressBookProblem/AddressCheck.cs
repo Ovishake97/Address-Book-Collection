@@ -7,7 +7,8 @@ namespace AddressBookProblem
 {
    public class AddressCheck
     {
-        //Creating a dictionary to store the address book
+        /// Creating Dictionary to store the address details
+        /// Storing the data in the address book map dictionary after creating it
          static Dictionary<string, AddressBookMain> addresssBookMap= new Dictionary<string, AddressBookMain>();
         //Adding the values to the dictionary
         public static void AddToAddressBook()
@@ -39,12 +40,9 @@ namespace AddressBookProblem
             
             
         }
-        public string GetFirstName(string firstName)
-        {
-            return addresssBookMap[firstName].firstName;
-        }
-
-        //Method to edit the details
+        
+        /// Editing the details of the address book
+        /// Taking input from the user and updating the address book after taking the new name
         public static void EditDetails()
         {
             Console.WriteLine("Enter the name you want to edit");
@@ -60,7 +58,8 @@ namespace AddressBookProblem
             Console.WriteLine("Edited details are");
             PrintAddress(newName);
         }
-        //Method to delete records
+        /// Creating a method to delete the details of a record
+        /// Taking the input from the user and deleting the corresponding address
         public static void DeleteDetails()
         {
             Console.WriteLine("Enter the name that you want to delete");
@@ -82,30 +81,45 @@ namespace AddressBookProblem
                 AddressBookMain adBook = items.Value;
                 if (adBook.firstName.Equals(key))
                 {
-                    Console.WriteLine(adBook.firstName);
-                    Console.WriteLine(adBook.lastName);
-                    Console.WriteLine(adBook.address);
-                    Console.WriteLine(adBook.state);
-                    Console.WriteLine(adBook.zip);
-                    Console.WriteLine(adBook.phoneNo);
-                    Console.WriteLine(adBook.emailId);
+                    Console.WriteLine("Name:"+adBook.firstName);
+                    Console.WriteLine("Last name: "+adBook.lastName);
+                    Console.WriteLine("Address: "+adBook.address);
+                    Console.WriteLine("State: "+adBook.state);
+                    Console.WriteLine("Zip code: "+adBook.zip);
+                    Console.WriteLine("Phone: "+adBook.phoneNo);
+                    Console.WriteLine("Email: "+adBook.emailId);
                 }
             }
         }
+        /// Getting the exisitng address books
+        /// Prints out all the exisitng address books
         public static void GetAddressBook() {
             Console.WriteLine("Exisiting address books are");
             if (addresssBookMap.Count > 0) {
                 foreach (var value in addresssBookMap) {
-                    Console.WriteLine("Name: " +value.Value.firstName);
-                    Console.WriteLine("Last name: " + value.Value.lastName);
-                    Console.WriteLine("Address: "+value.Value.address);
-                    Console.WriteLine("State: " +value.Value.state);
-                    Console.WriteLine("Zip: "+value.Value.zip);
-                    Console.WriteLine("Phone: "+value.Value.phoneNo);
-                    Console.WriteLine("Email: "+value.Value.emailId);
+                    Console.WriteLine(value.Value.firstName+"'s Address Book:");
+                    PrintAddress(value.Value.firstName);
+                    Console.WriteLine("-------------------------");
                 }
             }
-            
+        }
+
+        //Searching person by the name of the city 
+        //Getting input from the user and giving out the existing field records
+        public static void SearchByCity() {
+            Console.WriteLine("Enter name of the city");
+            string city = Console.ReadLine();
+            foreach (KeyValuePair<string, AddressBookMain> keys in addresssBookMap) {
+                AddressBookMain val = keys.Value;
+                if (val.address.Contains(city))
+                {
+                    Console.WriteLine("People from this city are:");
+                    Console.WriteLine(val.firstName);
+                }
+                else {
+                    Console.WriteLine("Address wasn't found");
+                }
+            }
         }
     }
 }

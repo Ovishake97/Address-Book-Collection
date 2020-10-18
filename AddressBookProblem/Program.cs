@@ -17,19 +17,18 @@ namespace AddressBookProblem
         }
 
         public static void SelectingOptions(int option) {
-            AddressCheck address = new AddressCheck();
             switch (option) {
                 case 1:
-                    address.AddToAddressBook();
+                    AddressCheck.AddToAddressBook();
                     break;
                 case 2:
-                    address.EditDetails();
+                   AddressCheck.EditDetails();
                     break;
                 case 3:
-                    address.DeleteDetails();
+                   AddressCheck.DeleteDetails();
                     break;
                 case 4:
-                    address.ExistingAddressBook();
+                    AddressCheck.GetAddressBook();
                     break;
                 default:
                     Console.WriteLine("Enter valid options");

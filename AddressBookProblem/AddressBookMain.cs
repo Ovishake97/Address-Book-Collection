@@ -4,6 +4,8 @@ using System.Text;
 
 namespace AddressBookProblem
 {
+    /// Storing the address credentials in a class
+    /// A parameterized constructor was also added
    public class AddressBookMain
     {
         public String firstName { get; set; }

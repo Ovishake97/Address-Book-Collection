@@ -16,6 +16,7 @@ namespace AddressBookProblem
             Console.ReadKey();
         }
 
+        ///Defining a method to facilitate choosing an option for the user
         public static void SelectingOptions(int option) {
             switch (option) {
                 case 1:
@@ -30,15 +31,22 @@ namespace AddressBookProblem
                 case 4:
                     AddressCheck.GetAddressBook();
                     break;
+                case 5:
+                    AddressCheck.SearchByCity();
+                    break;
+                case 6:
+                    AddressCheck.SearchByState();
+                    break;
                 default:
                     Console.WriteLine("Enter valid options");
                     ChooseOptions();
                     break;
             }
         }
+        ///  Displaying the list of options available for the user
         public static void ChooseOptions() {
             Console.WriteLine("Choose from the following options");
-            Console.WriteLine("\n1.Add to address book\n2.Edit details\n3.Delete details\n4.Display exisitng address books");
+            Console.WriteLine("\n1.Add to address book\n2.Edit details\n3.Delete details\n4.Display exisitng address books\n5.Search people in a city\n6.Search people in a state");
             int option = Convert.ToInt32(Console.ReadLine());
             SelectingOptions(option);
             Console.WriteLine("Do you wish to go back to the main menu? Enter Yes or No");

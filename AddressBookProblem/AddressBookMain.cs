@@ -6,13 +6,13 @@ namespace AddressBookProblem
 {
    public class AddressBookMain
     {
-        public String firstName;
-        public String lastName;
-        public String address;
-        public String state;
-        public int zip;
-        public double phoneNo;
-        public string emailId;
+        public String firstName { get; set; }
+        public String lastName{ get; set; }
+        public String address{ get; set; }
+        public String state{ get; set; }
+        public int zip { get; set; }
+        public double phoneNo { get; set; }
+        public string emailId { get; set; }
 
 
         public AddressBookMain(string firstName, string lastName, string address, string state, int zip, double phoneNo, string emailId)

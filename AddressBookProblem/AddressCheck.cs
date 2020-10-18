@@ -8,63 +8,64 @@ namespace AddressBookProblem
    public class AddressCheck
     {
         //Creating a dictionary to store the address book
-        private Dictionary<string, AddressBookMain> addresssBookMap;
-        public AddressCheck()
-        {
-
-            this.addresssBookMap = new Dictionary<string, AddressBookMain>();
-
-        }
-
+         static Dictionary<string, AddressBookMain> addresssBookMap= new Dictionary<string, AddressBookMain>();
         //Adding the values to the dictionary
-        public void AddToAddressBook()
+        public static void AddToAddressBook()
         {
             Console.WriteLine("Enter firstname");
             string firstName = Console.ReadLine();
-            Console.WriteLine("Enter lastname");
-            string lastName = Console.ReadLine();
-            Console.WriteLine("Enter address");
-            string address = Console.ReadLine();
-            Console.WriteLine("Enter state");
-            string state = Console.ReadLine();
-            Console.WriteLine("Enter zip");
-            int zip = Convert.ToInt32(Console.ReadLine());
-            Console.WriteLine("Enter phone number");
-            double phoneNo = Convert.ToDouble(Console.ReadLine());
-            Console.WriteLine("Enter email id");
-            string emailId = Console.ReadLine();
-            AddressBookMain addressBookMain = new AddressBookMain(firstName, lastName, address, state, zip, phoneNo, emailId);
-            this.addresssBookMap.Add(firstName, addressBookMain);
-            PrintAddress(firstName);
+            if (addresssBookMap.ContainsKey(firstName))
+            {
+                Console.WriteLine("The user name already exists");
+            }
+            else
+            {
+                Console.WriteLine("Enter lastname");
+                string lastName = Console.ReadLine();
+                Console.WriteLine("Enter address");
+                string address = Console.ReadLine();
+                Console.WriteLine("Enter state");
+                string state = Console.ReadLine();
+                Console.WriteLine("Enter zip");
+                int zip = Convert.ToInt32(Console.ReadLine());
+                Console.WriteLine("Enter phone number");
+                double phoneNo = Convert.ToDouble(Console.ReadLine());
+                Console.WriteLine("Enter email id");
+                string emailId = Console.ReadLine();
+                AddressBookMain addressBookMain = new AddressBookMain(firstName, lastName, address, state, zip, phoneNo, emailId);
+                addresssBookMap.Add(firstName, addressBookMain);
+                PrintAddress(firstName);
+            }
+            
             
         }
         public string GetFirstName(string firstName)
         {
-            return this.addresssBookMap[firstName].firstName;
+            return addresssBookMap[firstName].firstName;
         }
 
         //Method to edit the details
-        public void EditDetails()
+        public static void EditDetails()
         {
             Console.WriteLine("Enter the name you want to edit");
             string name = Console.ReadLine();
             Console.WriteLine("Enter the new name");
             string newName = Console.ReadLine();
-            if (this.addresssBookMap.ContainsKey(name))
+            if (addresssBookMap.ContainsKey(name))
             {
                 addresssBookMap[name].firstName = newName;
             }
             AddressBookMain addressBook = new AddressBookMain(newName, addresssBookMap[name].lastName, addresssBookMap[name].address, addresssBookMap[name].state, addresssBookMap[name].zip, addresssBookMap[name].phoneNo, addresssBookMap[name].emailId);
-            this.addresssBookMap.Add(newName, addressBook);
+            addresssBookMap.Add(newName, addressBook);
             Console.WriteLine("Edited details are");
             PrintAddress(newName);
         }
         //Method to delete records
-        public void DeleteDetails()
+        public static void DeleteDetails()
         {
             Console.WriteLine("Enter the name that you want to delete");
             string name = Console.ReadLine();
-            if (this.addresssBookMap.ContainsKey(name))
+            if (addresssBookMap.ContainsKey(name))
             {
                 addresssBookMap.Remove(name);
                 Console.WriteLine("Records having the first name " + name + " are deleted");
@@ -73,10 +74,10 @@ namespace AddressBookProblem
         }
 
         //Printing the values from the dictionary
-        public void PrintAddress(String key)
+        public static void PrintAddress(String key)
         {
 
-            foreach (KeyValuePair<string, AddressBookMain> items in this.addresssBookMap)
+            foreach (KeyValuePair<string, AddressBookMain> items in addresssBookMap)
             {
                 AddressBookMain adBook = items.Value;
                 if (adBook.firstName.Equals(key))
@@ -91,12 +92,20 @@ namespace AddressBookProblem
                 }
             }
         }
-        public void ExistingAddressBook() {
-            
+        public static void GetAddressBook() {
             Console.WriteLine("Exisiting address books are");
-            foreach(KeyValuePair<string, AddressBookMain> kvp in this.addresssBookMap) {
-                Console.WriteLine(kvp.Value.firstName+"'s Address");
+            if (addresssBookMap.Count > 0) {
+                foreach (var value in addresssBookMap) {
+                    Console.WriteLine("Name: " +value.Value.firstName);
+                    Console.WriteLine("Last name: " + value.Value.lastName);
+                    Console.WriteLine("Address: "+value.Value.address);
+                    Console.WriteLine("State: " +value.Value.state);
+                    Console.WriteLine("Zip: "+value.Value.zip);
+                    Console.WriteLine("Phone: "+value.Value.phoneNo);
+                    Console.WriteLine("Email: "+value.Value.emailId);
+                }
             }
+            
         }
     }
 }

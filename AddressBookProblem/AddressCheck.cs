@@ -5,11 +5,11 @@ using System.Text;
 
 namespace AddressBookProblem
 {
-   public class AddressCheck
+    public class AddressCheck
     {
         /// Creating Dictionary to store the address details
         /// Storing the data in the address book map dictionary after creating it
-         static Dictionary<string, AddressBookMain> addresssBookMap= new Dictionary<string, AddressBookMain>();
+        static Dictionary<string, AddressBookMain> addresssBookMap = new Dictionary<string, AddressBookMain>();
         //Adding the values to the dictionary
         public static void AddToAddressBook()
         {
@@ -37,10 +37,10 @@ namespace AddressBookProblem
                 addresssBookMap.Add(firstName, addressBookMain);
                 PrintAddress(firstName);
             }
-            
-            
+
+
         }
-        
+
         /// Editing the details of the address book
         /// Taking input from the user and updating the address book after taking the new name
         public static void EditDetails()
@@ -81,23 +81,26 @@ namespace AddressBookProblem
                 AddressBookMain adBook = items.Value;
                 if (adBook.firstName.Equals(key))
                 {
-                    Console.WriteLine("Name:"+adBook.firstName);
-                    Console.WriteLine("Last name: "+adBook.lastName);
-                    Console.WriteLine("Address: "+adBook.address);
-                    Console.WriteLine("State: "+adBook.state);
-                    Console.WriteLine("Zip code: "+adBook.zip);
-                    Console.WriteLine("Phone: "+adBook.phoneNo);
-                    Console.WriteLine("Email: "+adBook.emailId);
+                    Console.WriteLine("Name:" + adBook.firstName);
+                    Console.WriteLine("Last name: " + adBook.lastName);
+                    Console.WriteLine("Address: " + adBook.address);
+                    Console.WriteLine("State: " + adBook.state);
+                    Console.WriteLine("Zip code: " + adBook.zip);
+                    Console.WriteLine("Phone: " + adBook.phoneNo);
+                    Console.WriteLine("Email: " + adBook.emailId);
                 }
             }
         }
         /// Getting the exisitng address books
         /// Prints out all the exisitng address books
-        public static void GetAddressBook() {
+        public static void GetAddressBook()
+        {
             Console.WriteLine("Exisiting address books are");
-            if (addresssBookMap.Count > 0) {
-                foreach (var value in addresssBookMap) {
-                    Console.WriteLine(value.Value.firstName+"'s Address Book:");
+            if (addresssBookMap.Count > 0)
+            {
+                foreach (var value in addresssBookMap)
+                {
+                    Console.WriteLine(value.Value.firstName + "'s Address Book:");
                     PrintAddress(value.Value.firstName);
                     Console.WriteLine("-------------------------");
                 }
@@ -106,32 +109,16 @@ namespace AddressBookProblem
 
         //Method to print put a person's detail by the name of the city 
         //Getting input from the user and giving out the existing field records
-        public static void SearchByCity() {
+        public static void SearchByCity()
+        {
             Console.WriteLine("Enter name of the city");
             string city = Console.ReadLine();
-            foreach (KeyValuePair<string, AddressBookMain> keys in addresssBookMap) {
-                AddressBookMain val = keys.Value;
-                if (val.address.Contains(city))
-                {
-                    Console.WriteLine(val.firstName+"'s Address:");
-                    PrintAddress(val.firstName);
-                }
-                else {
-                    Console.WriteLine("Address wasn't found");
-                }
-            }
-        }
-        /// Method to print out a person's detail by his state
-        /// Input taken from the user and searched accordingly
-        public static void SearchByState() {
-            Console.WriteLine("Enter the name of the state");
-            string state = Console.ReadLine();
             foreach (KeyValuePair<string, AddressBookMain> keys in addresssBookMap)
             {
                 AddressBookMain val = keys.Value;
-                if (val.state.Contains(state))
+                if (val.address.Contains(city))
                 {
-                    Console.WriteLine(val.firstName+"'s Address");
+                    Console.WriteLine(val.firstName + "'s Address:");
                     PrintAddress(val.firstName);
                 }
                 else
@@ -139,6 +126,57 @@ namespace AddressBookProblem
                     Console.WriteLine("Address wasn't found");
                 }
             }
-        } 
+        }
+        /// Method to print out a person's detail by his state
+        /// Input taken from the user and searched accordingly
+        public static void SearchByState()
+        {
+            Console.WriteLine("Enter the name of the state");
+            string state = Console.ReadLine();
+            foreach (KeyValuePair<string, AddressBookMain> keys in addresssBookMap)
+            {
+                AddressBookMain val = keys.Value;
+                if (val.state.Contains(state))
+                {
+                    Console.WriteLine(val.firstName + "'s Address");
+                    PrintAddress(val.firstName);
+                }
+                else
+                {
+                    Console.WriteLine("Address wasn't found");
+                }
+            }
+        }
+        /// Counting a number of people in a city or in a state
+        /// Taking the input from the user and printing out the data correspondingly
+        public static void CountPeopleFromCityAndState()
+        {
+            Console.WriteLine("Enter the name of the state");
+            string state = Console.ReadLine();
+            Console.WriteLine("Enter the name of the city");
+            string city = Console.ReadLine();
+            int cityPeople = 0;
+            int statePeople = 0;
+            foreach (KeyValuePair<string, AddressBookMain> keys in addresssBookMap)
+            {
+                AddressBookMain val = keys.Value;
+                if (val.state.Contains(state))
+                {
+                    statePeople++;
+                }
+                
+            }
+            Console.WriteLine("No. of people in the state " + state + " are " + statePeople);
+            foreach (KeyValuePair<string, AddressBookMain> key in addresssBookMap)
+            {
+                AddressBookMain value = key.Value;
+                if (value.address.Contains(city))
+                {
+                    cityPeople++;
+                }
+                
+            }
+            Console.WriteLine("No. of people in the city " + city + " are " + cityPeople);
+        }
     }
 }

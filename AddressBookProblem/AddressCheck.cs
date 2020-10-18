@@ -104,7 +104,7 @@ namespace AddressBookProblem
             }
         }
 
-        //Searching person by the name of the city 
+        //Method to print put a person's detail by the name of the city 
         //Getting input from the user and giving out the existing field records
         public static void SearchByCity() {
             Console.WriteLine("Enter name of the city");
@@ -113,13 +113,32 @@ namespace AddressBookProblem
                 AddressBookMain val = keys.Value;
                 if (val.address.Contains(city))
                 {
-                    Console.WriteLine("People from this city are:");
-                    Console.WriteLine(val.firstName);
+                    Console.WriteLine(val.firstName+"'s Address:");
+                    PrintAddress(val.firstName);
                 }
                 else {
                     Console.WriteLine("Address wasn't found");
                 }
             }
         }
+        /// Method to print out a person's detail by his state
+        /// Input taken from the user and searched accordingly
+        public static void SearchByState() {
+            Console.WriteLine("Enter the name of the state");
+            string state = Console.ReadLine();
+            foreach (KeyValuePair<string, AddressBookMain> keys in addresssBookMap)
+            {
+                AddressBookMain val = keys.Value;
+                if (val.state.Contains(state))
+                {
+                    Console.WriteLine(val.firstName+"'s Address");
+                    PrintAddress(val.firstName);
+                }
+                else
+                {
+                    Console.WriteLine("Address wasn't found");
+                }
+            }
+        } 
     }
 }

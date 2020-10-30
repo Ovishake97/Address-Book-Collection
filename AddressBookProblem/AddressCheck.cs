@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Dynamic;
+using System.Linq;
 using System.Text;
 
 namespace AddressBookProblem
@@ -174,9 +175,22 @@ namespace AddressBookProblem
                 {
                     cityPeople++;
                 }
-                
             }
             Console.WriteLine("No. of people in the city " + city + " are " + cityPeople);
+        }
+        /// Method to sort an address book with the help of the firtname
+        public static void OrderByName() {
+            var SortedAddressBook = from address in addresssBookMap orderby address.Key select address;
+            foreach (var addressBook in SortedAddressBook) {
+                Console.WriteLine(addressBook.Value.firstName);
+                Console.WriteLine(addressBook.Value.lastName);
+                Console.WriteLine(addressBook.Value.address);
+                Console.WriteLine(addressBook.Value.state);
+                Console.WriteLine(addressBook.Value.zip);
+                Console.WriteLine(addressBook.Value.phoneNo);
+                Console.WriteLine(addressBook.Value.emailId);
+            }
+                                    
         }
     }
 }
